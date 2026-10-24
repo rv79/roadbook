@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadbook</title>
+<meta name="description" content="Roadbook nautique">
+<meta name="theme-color" content="#003a70">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Roadbook">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header id="top">
+  <div class="brand">Roadbook <span id="hdrDay"></span></div>
+  <div class="badges">
+    <span id="netBadge" class="badge">…</span>
+    <span id="gpsBadge" class="badge off">GPS</span>
+    <button id="themeBtn" class="iconbtn" title="Jour / nuit">Nuit</button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="lock" class="view hidden">
+    <h1>Roadbook nautique</h1>
+    <p>Les données sont chiffrées. Saisissez la phrase de passe (une seule fois par appareil).</p>
+    <form id="lockForm">
+      <input id="pass" type="password" autocomplete="current-password" placeholder="Phrase de passe" autocapitalize="off">
+      <button class="primary" type="submit">Déverrouiller</button>
+    </form>
+    <p id="lockMsg" class="warn"></p>
+  </section>
+
+  <section id="loading" class="view"><p class="big">Chargement…</p><p id="loadMsg"></p></section>
+
+  <section id="v-trip" class="view hidden"><div id="tripBody"></div></section>
+
+  <section id="v-day" class="view hidden">
+    <div id="dayChips" class="chips"></div>
+    <div class="row wrap">
+      <label class="field">Départ <input id="depTime" type="time" step="300"></label>
+      <div class="field">Vitesse surface
+        <div id="speedSeg" class="seg"></div>
+      </div>
+      <button id="depReset" class="ghost">Heure conseillée</button>
+    </div>
+    <div id="dayBody"></div>
+  </section>
+
+  <section id="v-charts" class="view hidden">
+    <div id="chartList"></div>
+  </section>
+
+  <section id="v-tides" class="view hidden">
+    <div class="row wrap">
+      <label class="field">Port <select id="tidePort"></select></label>
+      <label class="field">Date <select id="tideDate"></select></label>
+    </div>
+    <canvas id="tideCanvas" height="360"></canvas>
+    <div id="tideBody"></div>
+  </section>
+
+  <section id="v-weather" class="view hidden">
+    <div class="row wrap">
+      <button id="wxUpdate" class="primary">Mettre à jour la météo</button>
+      <span id="wxStatus" class="muted"></span>
+    </div>
+    <div id="wxBody"></div>
+  </section>
+
+  <section id="v-nav" class="view hidden">
+    <div class="row wrap">
+      <button id="gpsStart" class="primary">Activer le GPS</button>
+      <button id="gpsChart" class="ghost">Voir sur la carte</button>
+      <span class="muted">Étape suivie : <b id="navLeg"></b></span>
+    </div>
+    <div id="navBody"></div>
+  </section>
+
+  <section id="v-ports" class="view hidden"><div id="portsBody"></div></section>
+
+  <section id="v-info" class="view hidden"><div id="infoBody"></div></section>
+</main>
+
+<div id="viewer" class="hidden">
+  <div id="vBar">
+    <button id="vClose" class="iconbtn">✕ Fermer</button>
+    <span id="vTitle"></span>
+    <span class="spacer"></span>
+    <button id="vGps" class="iconbtn">Me situer</button>
+    <button id="vOut" class="iconbtn">−</button>
+    <button id="vIn" class="iconbtn">+</button>
+    <button id="vFit" class="iconbtn">Ajuster</button>
+  </div>
+  <div id="vStage"><div id="vLayer"><img id="vImg" alt=""><div id="vMark" class="hidden"></div></div></div>
+  <div id="vInfo"></div>
+</div>
+
+<nav id="tabs" class="hidden">
+  <button data-v="trip" class="on">Itinéraire</button>
+  <button data-v="day">Étape</button>
+  <button data-v="charts">Cartes</button>
+  <button data-v="tides">Marées</button>
+  <button data-v="weather">Météo</button>
+  <button data-v="nav">Navigation</button>
+  <button data-v="ports">Ports</button>
+  <button data-v="info">Données</button>
+</nav>
+<div id="toast" class="hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>
