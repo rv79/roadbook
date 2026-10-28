@@ -1,6 +1,6 @@
 /* Service worker: app shell precached per version; data files (data.json, atlas.bin, charts) cache-first in
    'rb-data' (URLs carry a content hash, so a new version never collides); files.json network-first. */
-const VERSION = '20261024-0950';
+const VERSION = '20261028-0903';
 const SHELL = ["index.html", "app.css", "app.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 const SHELL_CACHE = 'rb-shell-' + VERSION;
 const DATA_CACHE = 'rb-data';
